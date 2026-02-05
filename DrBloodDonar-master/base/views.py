@@ -67,19 +67,20 @@ def registerPage(request):
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    rooms = Room.objects.filter(
-        Q(topic__name__icontains=q) |
-        Q(name__icontains=q) |
-        Q(description__icontains=q)
-    )
+    donors = User.objects.filter(is_donor=True)
+    
+    if q:
+        donors = donors.filter(
+            Q(blood_group__icontains=q) |
+            Q(city__icontains=q) |
+            Q(username__icontains=q)
+        )
 
-    topics = Topic.objects.all()[0:5]
-    room_count = rooms.count()
-    room_messages = Message.objects.filter(
-        Q(room__topic__name__icontains=q))[0:3]
+    blood_groups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+    donor_count = donors.count()
 
-    context = {'rooms': rooms, 'topics': topics,
-               'room_count': room_count, 'room_messages': room_messages}
+    context = {'donors': donors, 'blood_groups': blood_groups,
+               'donor_count': donor_count}
     return render(request, 'base/home.html', context)
 
 

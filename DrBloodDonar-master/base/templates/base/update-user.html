@@ -1,42 +1,98 @@
 {% extends 'main.html' %}
-
 {% block content %}
-<main class="update-account layout">
-  <div class="container">
-    <div class="layout__box">
-      <div class="layout__boxHeader">
-        <div class="layout__boxTitle">
-          <a href="{% url 'home' %}">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-              <title>arrow-left</title>
-              <path
-                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
-              </path>
-            </svg>
-          </a>
-          <h3>Edit your profile</h3>
+<main class="container">
+  <div class="auth-box">
+    <div class="card">
+      <div class="card__header"
+        style="justify-content: center; flex-direction: column; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="font-size: 2rem; font-weight: 700; color: var(--color-text-main);">Donor Profile</h3>
+        <p style="color: var(--color-text-muted);">Update your information to be listed as a donor.</p>
+      </div>
+
+      <form class="form" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Avatar Field (Hidden or Standard) -->
+        <div class="form-group" style="text-align: center;">
+          <label for="id_avatar" class="form-label" style="cursor: pointer;">
+            <div class="avatar avatar--lg" style="margin: 0 auto; overflow: hidden; position: relative;">
+              <img src="{{form.instance.avatar.url}}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <span style="font-size: 1.2rem; color: var(--color-primary);">Change Photo</span>
+          </label>
+          <input type="file" name="avatar" accept="image/*" id="id_avatar" class="form-input" style="display: none;">
         </div>
-      </div>
-      <div class="layout__body">
-        <form class="form" action="" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
 
-          {% for field in form %}
-          <div class="form__group">
-            <label for="profile_pic">{{field.label}}</label>
-            {{field}}
-          </div>
-          {% endfor %}
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          {{form.name}}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Blood Group</label>
+          {{form.blood_group}}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">City / Location</label>
+          {{form.city}}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Distance from DHQ Hospital</label>
+          {{form.hospital_distance}}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Primary Phone Number</label>
+          {{form.phone_number}}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Alternatice Phone Number</label>
+          {{form.phone_number_2}}
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 1rem;">
+          {{form.is_donor}}
+          <label class="form-label" style="margin: 0;">Available for Donation</label>
+        </div>
+
+        <!-- Hidden fields for required auth, or maybe display readable -->
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          {{form.username}}
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          {{form.email}}
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bio (Optional)</label>
+          {{form.bio}}
+        </div>
 
 
-          <div class="form__action">
-            <a class="btn btn--dark" href="index.html">Cancel</a>
-            <button class="btn btn--main" type="submit">Update</button>
-          </div>
-        </form>
-      </div>
+        <div class="form__action" style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <a class="btn btn--secondary" href="{% url 'home' %}" style="flex: 1;">Cancel</a>
+          <button class="btn btn--primary" type="submit" style="flex: 1;">Save Profile</button>
+        </div>
+      </form>
     </div>
   </div>
-  </div>
 </main>
+<script>
+  // Simple script to preview image (optional)
+  document.getElementById('id_avatar').onchange = function (evt) {
+    var tgt = evt.target || window.event.srcElement,
+      files = tgt.files;
+    if (FileReader && files && files.length) {
+      var fr = new FileReader();
+      fr.onload = function () {
+        document.querySelector('.avatar img').src = fr.result;
+      }
+      fr.readAsDataURL(files[0]);
+    }
+  }
+</script>
 {% endblock content %}

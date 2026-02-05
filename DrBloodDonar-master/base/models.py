@@ -13,10 +13,12 @@ class User(AbstractUser):
         ('AB+', 'AB+'), ('AB-', 'AB-'),
         ('O+', 'O+'), ('O-', 'O-'),
     ])
-    city = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=100, null=True, blank=True, default="Bahawalnagar")
+    hospital_distance = models.CharField(max_length=200, null=True, blank=True, help_text="e.g. 2km from DHQ Hospital")
     phone_number = models.CharField(max_length=15, null=True, blank=True)
-    is_donor = models.BooleanField(default=False)
-
+    phone_number_2 = models.CharField(max_length=15, null=True, blank=True)
+    is_donor = models.BooleanField(default=True, verbose_name="Available for Donation")
+    
     avatar = models.ImageField(null=True, default="avatar.svg")
 
     USERNAME_FIELD = 'email'
