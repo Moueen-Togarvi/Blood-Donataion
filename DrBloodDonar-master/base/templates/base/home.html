@@ -8,23 +8,6 @@
     <h1>Find Blood Donors in <span
         style="color: var(--color-primary); text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3);">Bahawalnagar</span>.
     </h1>
-    <p>Search for available donors by blood group and contact them directly.</p>
-
-    <!-- Search Bar -->
-    <form action="{% url 'home' %}" method="GET"
-      style="max-width: 500px; margin: 0 auto 2rem; display: flex; gap: 1rem;">
-      <input type="text" name="q" placeholder="Search by Blood Group (e.g. A+)..." class="form-input" style="flex: 1;">
-      <button type="submit" class="btn btn--primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
-      </button>
-    </form>
-
-    {% if not request.user.is_authenticated %}
-    <a href="{% url 'register' %}" class="btn btn--secondary" style="font-size: 1.6rem;">Register as Donor</a>
-    {% endif %}
   </section>
 
   <div class="layout-grid">
@@ -35,8 +18,8 @@
 
     <!-- Main Feed -->
     <div class="feed-section">
-      <div class="card__header" style="margin-bottom: 2rem;">
-        <div>
+      <div class="card__header" style="margin-bottom: 2rem; text-align: center; justify-content: center;">
+        <div style="width: 100%;">
           <h2 style="font-size: 2.4rem; font-weight: 700; color: var(--color-text-main); margin-bottom: 0.5rem;">
             Available Donors</h2>
           <p style="color: var(--color-text-muted); font-size: 1.4rem;">{{donor_count}} donors found</p>

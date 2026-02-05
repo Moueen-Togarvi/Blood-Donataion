@@ -1,25 +1,31 @@
 <div class="topics">
-    <div class="card" style="position: sticky; top: 10rem;">
-        <div class="card__header">
-            <h3
-                style="font-size: 1.4rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                Filter Donors</h3>
-        </div>
-
-        <div class="filter-group">
-            <a href="{% url 'home' %}" class="filter-link active" style="font-weight: 600;">All Blood Groups</a>
-
-            {% for group in blood_groups %}
-            <a href="{% url 'home' %}?q={{group|urlencode}}" class="filter-link"
-                style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Blood Group <span class="detail-highlight">{{group}}</span></span>
+    <div class="card" style="padding: 1.5rem 2rem; border-radius: 1.5rem; margin-bottom: 0;">
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.8rem; border-right: 1px solid #e2e8f0; padding-right: 2rem;"
+                class="mbl-hide">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--color-primary)"
                     viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
-            </a>
-            {% endfor %}
+                <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--color-text-main); white-space: nowrap;">
+                    Quick Filter</h3>
+            </div>
+
+            <div class="filter-pills" style="padding: 0;">
+                <a href="{% url 'home' %}" class="filter-pill {% if not request.GET.q %}active{% endif %}"
+                    style="padding: 0.6rem 1.4rem; font-size: 1.3rem;">
+                    All Groups
+                </a>
+
+                {% for group in blood_groups %}
+                <a href="{% url 'home' %}?q={{group|urlencode}}"
+                    class="filter-pill {% if request.GET.q == group %}active{% endif %}"
+                    style="padding: 0.6rem 1.4rem; font-size: 1.3rem;">
+                    {{group}}
+                </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
