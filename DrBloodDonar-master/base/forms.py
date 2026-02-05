@@ -6,7 +6,7 @@ from .models import Room, User
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['name', 'username', 'email', 'password1', 'password2']
+        fields = ['name', 'username', 'email', 'blood_group', 'city', 'phone_number', 'is_donor']
 
 
 class RoomForm(ModelForm):
@@ -19,4 +19,4 @@ class RoomForm(ModelForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['avatar', 'name', 'username', 'email', 'bio']
+        fields = ['avatar', 'name', 'username', 'email', 'bio', 'blood_group', 'city', 'phone_number', 'is_donor']

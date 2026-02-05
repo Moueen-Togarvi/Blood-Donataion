@@ -27,12 +27,23 @@
           <p>
             {{user.bio}}
           </p>
+          </p>
+          <div class="profile__details"
+            style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--color-dark-light);">
+            <p><strong>Blood Group:</strong> {{user.blood_group|default:"Not specified"}}</p>
+            <p><strong>City:</strong> {{user.city|default:"Not specified"}}</p>
+            {% if user.is_donor %}
+            <p style="color: var(--color-success); font-weight: bold;">Available Donor ✅</p>
+            {% else %}
+            <p style="color: var(--color-error);">Not currently donating ❌</p>
+            {% endif %}
+          </div>
         </div>
       </div>
 
       <div class="roomList__header">
         <div>
-          <h2>Study Rooms Hosted by dennis_ivy</a>
+          <h2>Donation Requests by {{user.username}}</a>
           </h2>
         </div>
       </div>
