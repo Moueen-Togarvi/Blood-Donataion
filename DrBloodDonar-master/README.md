@@ -1,78 +1,65 @@
-<div align="center">
-<img width="30%" src="https://user-images.githubusercontent.com/72341453/134747028-7e2d90cc-a92f-4f66-815e-54a0d50cca54.PNG">
+# Dr Blood Donar - Bahawalnagar Donor Directory
 
-# Dr Blood Donar
-</div>
+A specialized Django-based web application designed as a **Blood Donor Directory** for the city of **Bahawalnagar, Punjab, Pakistan**. This platform connects people in urgent need of blood with local available donors.
 
-### Cloning the repository
+## 🌟 Key Features
 
---> Clone the repository using the command below :
+- **Mobile-First Design**: Optimized for a native app-like experience on mobile devices.
+- **Bahawalnagar Focused**: Specifically localized for Bahawalnagar with pre-filled locations.
+- **Quick Search Pills**: Interactive blood group filters for instant results.
+- **Verified Donors**: Prominent badges for verified and available donors.
+- **One-Click Contact**: "Call Now" and "Copy Number" buttons for fast communication.
+- **Minimalist Interface**: English-only, clean, and extremely simple navigation.
+- **Donor Profiles**: Detailed listings including distance from DHQ Hospital and secondary phone numbers.
+
+## 🚀 Tech Stack
+
+- **Backend**: Python / Django
+- **Frontend**: Vanilla CSS (Modern, Responsive Design)
+- **Database**: SQLite (Default)
+
+## 🛠️ Installation & Setup
+
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/divanov11/Dr Blood Donar.git
-
+git clone https://github.com/moueen-togarvi/Blood-Donataion.git
+cd Blood-Donataion/DrBloodDonar-master
 ```
 
---> Move into the directory where we have the project files : 
+### 2. Set Up Virtual Environment
 ```bash
-cd Dr Blood Donar
-
-```
-
---> Create a virtual environment :
-```bash
-# Let's install virtualenv first
+# Install virtualenv if you haven't
 pip install virtualenv
 
-# Then we create our virtual environment
-virtualenv envname
+# Create environment
+python -m venv venv
 
+# Activate (Linux/Mac)
+source venv/bin/activate
+
+# Activate (Windows)
+venv\Scripts\activate
 ```
 
---> Activate the virtual environment :
-```bash
-envname\scripts\activate
-
-```
-
---> Install the requirements :
+### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
-
 ```
 
-#
+### 4. Database Setup
+```bash
+python manage.py migrate
+```
 
-### Running the App
-
---> To run the App, we use :
+### 5. Run the Application
 ```bash
 python manage.py runserver
-
 ```
+Visit `http://127.0.0.1:8000/` in your browser.
 
-> ⚠ Then, the development server will be started at http://127.0.0.1:8000/
+## 📸 Project Focus
 
-#
+The project has been pivoted from a general "Blood Request" board to a dedicated **Donor Directory**. The UI/UX is designed for maximum accessibility, prioritizing speed and clarity for users in medical emergencies.
 
-### App Preview :
-
-<table width="100%"> 
-<tr>
-<td width="50%">      
-&nbsp; 
-<br>
-<p align="center">
-  Feed Home
-</p>
-<img src="https://user-images.githubusercontent.com/72341453/134747262-0a92233d-8010-40f8-84c5-8d94895aac44.PNG">
-</td> 
-<td width="50%">
-<br>
-<p align="center">
-  Room Conversation Preview
-</p>
-<img src="https://user-images.githubusercontent.com/72341453/134747155-3ca5b55f-b064-4741-aeae-abe90bddf41e.PNG">  
-</td>
-</table>
-
-
+---
+*Developed with focus on community service for Bahawalnagar.*
