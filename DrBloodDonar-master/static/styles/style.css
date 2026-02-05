@@ -12,16 +12,17 @@
   /* Calm Blue */
 
   /* Neutral Colors */
-  --color-bg: #F8FAFC;
-  /* Light Gray Background */
+  /* Neutral Colors */
+  --color-bg: #E8EDF2;
+  /* Darker Light Gray for Contrast */
   --color-surface: #FFFFFF;
   /* White Surface */
   --color-text-main: #0F172A;
   /* Dark Slate Text */
-  --color-text-muted: #64748B;
-  /* Muted Text */
-  --color-border: #E2E8F0;
-  /* Light Border */
+  --color-text-muted: #52627a;
+  /* Darker Muted Text for Visibility */
+  --color-border: #CBD5E1;
+  /* Darker Border for Visibility */
 
   /* Status Colors */
   --color-success: #10B981;
@@ -163,18 +164,32 @@ img {
    Layout: Navbar
    ============================ */
 .navbar {
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   position: sticky;
-  top: 0;
+  top: 2rem;
   z-index: 50;
-  padding: 1.2rem 0;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px -1px rgba(0, 0, 0, 0.08);
+  /* Stronger shadow for floating effect */
+  max-width: var(--container-width);
+  margin: 0 auto 2rem auto;
+  /* Center visually */
+  border-radius: 2rem;
+  /* Rounded pill shape */
+  width: 95%;
+  /* Responsive width */
 }
 
 .navbar__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  /* Remove padding as parent handles it */
+  width: 100%;
 }
 
 .navbar__logo {
@@ -220,7 +235,10 @@ img {
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   padding: 2rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  /* Softer but visible shadow */
+  margin-bottom: 2.5rem;
+  /* Explicit separation */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -269,6 +287,11 @@ img {
   color: #EF4444;
 }
 
+.badge--green {
+  background-color: #ECFDF5;
+  color: #10B981;
+}
+
 .badge--blue {
   background-color: #EFF6FF;
   color: #3B82F6;
@@ -314,24 +337,45 @@ img {
 .hero {
   background-color: var(--color-secondary);
   color: white;
-  padding: 6rem 0;
+  padding: 4rem 2rem;
+  /* Reduced padding */
   text-align: center;
   margin-bottom: 3rem;
   border-radius: var(--radius-lg);
+  margin-top: 3rem;
+  /* Top margin as requested */
+  max-width: 900px;
+  /* Restrict width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero h1 {
-  font-size: 3.6rem;
+  font-size: 3rem;
+  /* Slightly smaller */
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .hero p {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #94A3B8;
-  max-width: 600px;
-  margin: 0 auto 3rem;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.text-highlight {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.detail-highlight {
+  font-weight: 600;
+  color: var(--color-text-main);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
 }
 
 /* Request List Specifics */
@@ -379,9 +423,15 @@ img {
 }
 
 .filter-link:hover,
-.filter-link.active {
-  background-color: white;
-  color: var(--color-primary);
-  font-weight: 500;
-  box-shadow: var(--shadow-sm);
+/* Donor Grid */
+.donor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 600px) {
+  .donor-grid {
+    grid-template-columns: 1fr;
+  }
 }

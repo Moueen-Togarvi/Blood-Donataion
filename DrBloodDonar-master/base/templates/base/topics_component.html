@@ -1,15 +1,25 @@
 <div class="topics">
-    <div class="filter-group">
-        <h3 class="form-label"
-            style="margin-bottom: 1rem; color: var(--color-text-muted); text-transform: uppercase; font-size: 1.2rem; letter-spacing: 1px;">
-            Filter Donors</h3>
+    <div class="card" style="position: sticky; top: 10rem;">
+        <div class="card__header">
+            <h3
+                style="font-size: 1.4rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                Filter Donors</h3>
+        </div>
 
-        <a href="{% url 'home' %}" class="filter-link active">All Blood Groups</a>
+        <div class="filter-group">
+            <a href="{% url 'home' %}" class="filter-link active" style="font-weight: 600;">All Blood Groups</a>
 
-        {% for group in blood_groups %}
-        <a href="{% url 'home' %}?q={{group|urlencode}}" class="filter-link">
-            Blood Group {{group}}
-        </a>
-        {% endfor %}
+            {% for group in blood_groups %}
+            <a href="{% url 'home' %}?q={{group|urlencode}}" class="filter-link"
+                style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Blood Group <span class="detail-highlight">{{group}}</span></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--color-primary)"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                </svg>
+            </a>
+            {% endfor %}
+        </div>
     </div>
 </div>

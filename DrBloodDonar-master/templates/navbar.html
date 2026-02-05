@@ -17,9 +17,10 @@
                 Edit Donor Profile
             </a>
             <a href="{% url 'user-profile' request.user.id %}" class="avatar-link" title="Profile">
-                <img src="{{request.user.avatar.url}}" alt="User Avatar" class="avatar avatar--sm">
+                <img src="{% static 'images/avatar.svg' %}" alt="User Avatar" class="avatar avatar--sm">
             </a>
-            <a href="{% url 'logout' %}" class="btn btn--text">Logout</a>
+            <a href="{% url 'logout' %}" class="btn btn--primary"
+                style="background-color: var(--color-primary); color: white;">Logout</a>
             {% else %}
             <a href="{% url 'login' %}" class="btn btn--text">Login</a>
             <a href="{% url 'register' %}" class="btn btn--primary">Sign Up</a>
