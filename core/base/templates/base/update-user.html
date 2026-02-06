@@ -1,0 +1,123 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+  .form-grid-responsive {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid-responsive {
+      grid-template-columns: 1fr !important;
+    }
+
+    .auth-box-custom {
+      padding: 0.5rem 0 !important;
+    }
+
+    .card-custom {
+      padding: 1.2rem !important;
+    }
+
+    .available-card-custom {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 1.5rem !important;
+    }
+  }
+</style>
+<main class="container">
+  <div class="auth-box auth-box-custom" style="padding: 1rem 0;">
+    <div class="card card-custom" style="padding: 1.5rem; border-radius: 1rem; max-width: 500px; margin: 0 auto;">
+      <div class="card__header"
+        style="justify-content: center; flex-direction: column; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+        <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--color-text-main);">Update Profile</h3>
+        <p style="color: var(--color-text-muted); font-size: 1.2rem;">Keep your donor information up to date.</p>
+      </div>
+
+      <form class="form" action="" method="POST">
+        {% csrf_token %}
+
+        <div class="form-grid-responsive">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            {{form.name}}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Blood Group</label>
+            {{form.blood_group}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Home Address</label>
+          {{form.home_address}}
+        </div>
+
+        <div class="form-grid-responsive">
+          <div class="form-group">
+            <label class="form-label">City / Location</label>
+            {{form.city}}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Distance to DHQ</label>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              {{form.hospital_distance}}
+              <span style="font-size: 1.4rem; font-weight: 600; color: var(--color-text-muted);">km</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid-responsive">
+          <div class="form-group">
+            <label class="form-label">Primary Phone</label>
+            {{form.phone_number}}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Alt Phone</label>
+            {{form.phone_number_2}}
+          </div>
+        </div>
+
+        <div style="margin: 1.5rem 0;">
+          <div class="available-card-custom"
+            style="display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.5rem; background: #ecfdf5; border: 2px solid #10b981; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+            <div style="display: flex; align-items: center; gap: 1.2rem;">
+              <div
+                style="background: #10b981; color: white; padding: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M8 1a1 1 0 0 1 1 1v2.101a7.002 7.002 0 0 1 1.902 12.636a1 1 0 0 1-1.03-1.713a5 5 0 1 0-3.744 0a1 1 0 0 1-1.03 1.713A7.002 7.002 0 0 1 7 4.101V2a1 1 0 0 1 1-1zm0 3.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z" />
+                </svg>
+              </div>
+              <div>
+                <label class="form-label"
+                  style="margin: 0; font-size: 1.6rem; font-weight: 800; color: #065f46;">Available for Donation</label>
+                <p style="margin: 0; font-size: 1.1rem; color: #047857;">Show your profile in the donor search.</p>
+              </div>
+            </div>
+            <div style="transform: scale(1.6); margin-right: 1rem; cursor: pointer;">
+              {{form.is_donor}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group"
+          style="border-top: 1px dashed var(--color-border); padding-top: 1rem; margin-top: 0.5rem;">
+          <label class="form-label">Email Address</label>
+          {{form.email}}
+        </div>
+
+        <div class="form__action" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <a class="btn btn--secondary" href="{% url 'home' %}" style="flex: 1; padding: 0.8rem;">Cancel</a>
+          <button class="btn btn--primary" type="submit" style="flex: 1; padding: 0.8rem;">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock content %}
