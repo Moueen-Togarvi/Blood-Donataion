@@ -6,7 +6,7 @@ from .models import Room, User
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['name', 'username', 'email', 'blood_group', 'city', 'hospital_distance', 'phone_number', 'phone_number_2', 'is_donor']
+        fields = ['name', 'username', 'email', 'blood_group', 'home_address', 'city', 'hospital_distance', 'phone_number', 'phone_number_2', 'is_donor']
 
     def __init__(self, *args, **kwargs):
         super(MyUserCreationForm, self).__init__(*args, **kwargs)
@@ -29,7 +29,7 @@ class RoomForm(ModelForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['avatar', 'name', 'username', 'email', 'bio', 'blood_group', 'city', 'hospital_distance', 'phone_number', 'phone_number_2', 'is_donor']
+        fields = ['name', 'username', 'email', 'home_address', 'blood_group', 'city', 'hospital_distance', 'phone_number', 'phone_number_2', 'is_donor']
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)

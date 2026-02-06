@@ -241,7 +241,11 @@ img {
 }
 
 .mbl-hide {
-  display: block;
+  display: none !important;
+}
+
+.mbl-show {
+  display: block !important;
 }
 
 @media (min-width: 900px) {
@@ -250,7 +254,11 @@ img {
   }
 
   .mbl-hide {
-    display: block !important;
+    display: flex !important;
+  }
+
+  .mbl-show {
+    display: none !important;
   }
 
   .btn--mini {
