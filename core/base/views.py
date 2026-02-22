@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from .models import Room, Topic, Message, User
 from .forms import RoomForm, UserForm, MyUserCreationForm
 
@@ -22,15 +23,15 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        email = request.POST.get('email').lower()
+        name = request.POST.get('name')
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(name=name)
         except:
             messages.error(request, 'User does not exist')
 
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, name=name, password=password)
 
         if user is not None:
             login(request, user)
@@ -65,20 +66,23 @@ def registerPage(request):
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    donors = User.objects.filter(is_donor=True)
+    donors = User.objects.filter(is_donor=True, is_suspended=False)
     
     if q:
         donors = donors.filter(
             Q(blood_group__icontains=q) |
             Q(city__icontains=q) |
-            Q(name__icontains=q) |
-            Q(email__icontains=q)
+            Q(name__icontains=q)
         )
 
     blood_groups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
     donor_count = donors.count()
 
-    context = {'donors': donors, 'blood_groups': blood_groups,
+    paginator = Paginator(donors, 10)  # Show 10 donors per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'donors': page_obj, 'blood_groups': blood_groups,
                'donor_count': donor_count}
     return render(request, 'base/home.html', context)
 

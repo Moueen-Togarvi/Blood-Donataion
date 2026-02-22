@@ -393,10 +393,10 @@ img {
 
 /* Hero Section */
 .hero {
-  background-color: var(--color-secondary);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
   color: white;
-  padding: 4rem 2rem;
-  /* Reduced padding */
+  padding: 5rem 2rem;
+  /* Slightly increased padding for elegance */
   text-align: center;
   margin-bottom: 3rem;
   border-radius: var(--radius-lg);
@@ -406,6 +406,8 @@ img {
   /* Restrict width */
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 10px 25px rgba(29, 53, 87, 0.2);
+  /* Added soft shadow */
 }
 
 @media (max-width: 600px) {
@@ -482,11 +484,28 @@ img {
 
 .filter-pills {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
   padding: 0.5rem 0;
-  justify-content: center;
-  /* Centering pills */
+  justify-content: flex-start;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+}
+
+.filter-pills::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+@media (min-width: 900px) {
+  .filter-pills {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 .filter-pill {
@@ -502,6 +521,8 @@ img {
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
 }
 
 .filter-pill:hover {
@@ -525,11 +546,10 @@ img {
   font-size: 1.5rem;
 }
 
-.filter-link:hover,
 /* Donor Grid */
 .donor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
 }
 

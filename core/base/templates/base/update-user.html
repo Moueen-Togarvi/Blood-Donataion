@@ -46,6 +46,18 @@
           </div>
 
           <div class="form-group">
+            <label class="form-label">Email Address</label>
+            {{form.email}}
+          </div>
+        </div>
+
+        <div class="form-grid-responsive">
+          <div class="form-group">
+            <label class="form-label">Age</label>
+            {{form.age}}
+          </div>
+
+          <div class="form-group">
             <label class="form-label">Blood Group</label>
             {{form.blood_group}}
           </div>
@@ -106,11 +118,7 @@
           </div>
         </div>
 
-        <div class="form-group"
-          style="border-top: 1px dashed var(--color-border); padding-top: 1rem; margin-top: 0.5rem;">
-          <label class="form-label">Email Address</label>
-          {{form.email}}
-        </div>
+
 
         <div class="form__action" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
           <a class="btn btn--secondary" href="{% url 'home' %}" style="flex: 1; padding: 0.8rem;">Cancel</a>

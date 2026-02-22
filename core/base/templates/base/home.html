@@ -27,6 +27,40 @@
       </div>
 
       {% include 'base/feed_component.html' %}
+
+      <!-- Pagination -->
+      {% if donors.has_other_pages %}
+      <div class="pagination"
+        style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 4rem;">
+        {% if donors.has_previous %}
+        <a href="?page={{ donors.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
+          class="btn btn--secondary"
+          style="padding: 0.8rem 1.6rem; text-decoration: none; border-radius: 0.8rem; font-size: 1.4rem; font-weight: 600;">&laquo;
+          Prev</a>
+        {% else %}
+        <span class="btn btn--secondary"
+          style="padding: 0.8rem 1.6rem; border-radius: 0.8rem; opacity: 0.5; cursor: not-allowed; font-size: 1.4rem; font-weight: 600;">&laquo;
+          Prev</span>
+        {% endif %}
+
+        <span
+          style="font-size: 1.4rem; font-weight: 700; color: var(--color-text-main); background: #f8fafc; padding: 0.8rem 1.6rem; border-radius: 0.8rem; border: 1px solid #e2e8f0;">
+          Page {{ donors.number }} of {{ donors.paginator.num_pages }}
+        </span>
+
+        {% if donors.has_next %}
+        <a href="?page={{ donors.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
+          class="btn btn--secondary"
+          style="padding: 0.8rem 1.6rem; text-decoration: none; border-radius: 0.8rem; font-size: 1.4rem; font-weight: 600;">Next
+          &raquo;</a>
+        {% else %}
+        <span class="btn btn--secondary"
+          style="padding: 0.8rem 1.6rem; border-radius: 0.8rem; opacity: 0.5; cursor: not-allowed; font-size: 1.4rem; font-weight: 600;">Next
+          &raquo;</span>
+        {% endif %}
+      </div>
+      {% endif %}
+
     </div>
   </div>
 </main>

@@ -1,7 +1,7 @@
 <style>
     .donor-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 2rem;
     }
 
@@ -28,34 +28,77 @@
         .action-btn-text {
             font-size: 1.2rem !important;
         }
+
+        .tap-to-call-btn {
+            max-width: 100% !important;
+        }
+    }
+
+    .tap-to-call-btn {
+        width: 100%;
+        max-width: 260px;
+        margin: 0 auto;
     }
 </style>
 <div class="donor-grid">
     {% for donor in donors %}
     <div class="card card-custom"
-        style="margin-bottom:0;position:relative;padding:2.2rem; border-radius: 1.5rem; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+        style="margin-bottom:0;position:relative;padding:2.2rem; border-radius: 1.5rem; transition: transform 0.2s ease, box-shadow 0.2s ease; overflow: hidden; border: 1px solid #e2e8f0; background: #ffffff;">
+        {% if donor.donor_id %}
+        <div
+            style="position:absolute; top: 0; left: 0; display: flex; align-items: center; gap: 0.4rem; background: #0f172a; color: #f8fafc; padding: 0.3rem 0.8rem; border-radius: 0 0 1.2rem 0; box-shadow: 2px 2px 8px rgba(0,0,0,0.1); z-index: 10;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
+            </svg>
+            <span style="font-size: 0.9rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">ID:
+                {{donor.donor_id}}</span>
+        </div>
+        {% endif %}
         <span class="badge badge--green"
-            style="position:absolute;top:1rem;right:1rem;font-size:1.1rem;padding:0.4rem 0.8rem;border:1px solid rgba(16,185,129,0.2);font-weight:700;">Verified
-            Donor</span>
+            style="position:absolute;top:0;right:0;font-size:0.9rem;padding:0.3rem 0.8rem; border-radius: 0 0 0 1.2rem; border:none; background: #10b981; color: white; font-weight:800; display:flex;align-items:center;gap:0.3rem; box-shadow: -2px 2px 8px rgba(16,185,129,0.2); z-index: 10;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 16 16"
+                stroke="currentColor" stroke-width="1">
+                <path
+                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+            </svg>
+            Verified
+        </span>
 
-        <div class="request-card" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start;">
+        <div class="request-card"
+            style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start; margin-top: 2rem;">
             <div style="display:flex;gap:2rem;width:100%; align-items: center;">
-                <div class="blood-drop blood-drop-custom"
-                    style="width: 5.5rem; height: 5.5rem; font-size: 2rem; border: 3px solid var(--color-primary); background: white;">
-                    {{donor.blood_group}}</div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+                    <span
+                        style="font-size: 1rem; color: var(--color-text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Group</span>
+                    <div class="blood-drop blood-drop-custom"
+                        style="width: 6rem; height: 6rem; font-size: 2.2rem; border: 3px solid var(--color-primary); background: transparent; color: var(--color-primary); box-shadow: 0 4px 12px rgba(230,57,70,0.15);">
+                        {{donor.blood_group}}</div>
+                </div>
                 <div style="flex:1;">
-                    <div style="margin-bottom: 0.8rem;">
-                        <span
-                            style="font-size: 1.2rem; color: var(--color-text-muted); display: flex; align-items: center; gap: 0.5rem; font-weight: 600; text-transform: uppercase;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+                        <div
+                            style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(226, 57, 70, 0.08); border: 1px dashed rgba(226, 57, 70, 0.4); padding: 0.4rem 1rem; border-radius: 6px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--color-primary)"
                                 viewBox="0 0 16 16">
-                                <path
-                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg>
-                            Name:</span>
-                        <h3 class="card__title donor-name-custom"
-                            style="font-size: 2.2rem; margin: 0; color: var(--color-text-main); font-weight: 800; border: 2px solid #e2e8f0; padding: 0.5rem 1.2rem; border-radius: 1rem; display: inline-block; background: #f8fafc; box-shadow: var(--shadow-sm);">
-                            {{donor.name|default:donor.email}}</h3>
+                            <h3 class="card__title donor-name-custom"
+                                style="font-size: 1.6rem; margin: 0; font-weight: 800; color: #000000; letter-spacing: -0.5px; text-transform: uppercase; line-height: 1;">
+                                {{donor.name|default:donor.email|capfirst}}
+                            </h3>
+                        </div>
+                        {% if donor.age %}
+                        <div
+                            style="display: inline-block; background: rgba(226, 57, 70, 0.08); border: 1px dashed rgba(226, 57, 70, 0.4); padding: 0.05rem 0.4rem; border-radius: 4px;">
+                            <span
+                                style="font-size: 0.85rem; font-weight: 800; color: var(--color-primary); text-transform: uppercase; line-height: 1;">
+                                {{donor.age}} Years
+                            </span>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -87,7 +130,9 @@
                                         d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                                 </svg>
                             </div>
-                            <span style="font-weight: 800;">{{donor.city}}</span>
+                            <span style="font-weight: 800;"><span
+                                    style="font-weight:500;color:var(--color-text-muted);font-size:1.2rem;text-transform:uppercase;">City:
+                                </span>{{donor.city}}</span>
                         </div>
                     </div>
 
@@ -103,12 +148,13 @@
                         </div>
                         <div>
                             <span style="font-weight: 800; display: block; line-height: 1.2; font-size: 1.6rem;">
-                                {% if donor.hospital_distance %}{{ donor.hospital_distance }}km{% else %}Near DHQ
+                                {% if donor.hospital_distance %}Only {{ donor.hospital_distance }}km away{% else %}Near
+                                DHQ
                                 Hospital{% endif %}
                             </span>
                             <span
-                                style="color:var(--color-text-muted);font-size:1.1rem; text-transform: uppercase; letter-spacing: 0.5px;">Distance
-                                from Hospital</span>
+                                style="color:var(--color-text-main);font-size:1.1rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">From
+                                DHQ Hospital</span>
                         </div>
                     </div>
                 </div>
@@ -116,29 +162,35 @@
                 <!-- Action Buttons -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                     {% if donor.phone_number %}
-                    <a href="tel:{{donor.phone_number}}" class="btn btn--primary action-btn-text"
-                        style="width: 100%; justify-content: center; font-weight: 800; border-radius: 5rem; font-size: 1.4rem; padding: 0.8rem 1.5rem; box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);">
+                    <a href="tel:{{donor.phone_number}}" class="btn btn--primary action-btn-text tap-to-call-btn"
+                        style="justify-content: center; font-weight: 800; border-radius: 1.2rem; font-size: 1.4rem; padding: 1.2rem 1.5rem; box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 16 16"
                             style="margin-right: 8px;">
                             <path fill-rule="evenodd"
                                 d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
                         </svg>
-                        Call Now
+                        Tap to Call
                     </a>
 
-                    <div style="display: flex; gap: 1rem; width: 100%;">
+                    <div style="display: flex; gap: 1rem; width: 100%; flex-wrap: wrap;">
                         <button onclick="copyToClipboard('{{donor.phone_number}}')" class="btn action-btn-text"
-                            style="flex: 1; justify-content: space-between; align-items: center; border-radius: 1.2rem; background: white; border: 2.5px solid #E2E8F0; color: var(--color-text-main); font-weight: 800; padding: 1.2rem 1rem; font-size: 1.4rem; transition: all 0.2s; box-shadow: var(--shadow-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            <div style="display: flex; align-items: center; gap: 0.8rem; overflow: hidden;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="var(--color-primary)" viewBox="0 0 16 16" style="flex-shrink: 0;">
-                                    <path fill-rule="evenodd"
-                                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                                </svg>
-                                <span style="overflow: hidden; text-overflow: ellipsis;">{{donor.phone_number}}</span>
+                            style="flex: 1; min-width: 140px; justify-content: space-between; align-items: flex-end; border-radius: 1.2rem; background: white; border: 2px solid #E2E8F0; color: var(--color-text-main); font-weight: 700; padding: 1rem 1.2rem; transition: all 0.2s; box-shadow: var(--shadow-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <div
+                                style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; overflow: hidden;">
+                                <span
+                                    style="font-weight:700;color:var(--color-text-muted);font-size:1rem;text-transform:uppercase;letter-spacing:0.5px;">Tap
+                                    to Copy</span>
+                                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                        fill="var(--color-primary)" viewBox="0 0 16 16" style="flex-shrink: 0;">
+                                        <path fill-rule="evenodd"
+                                            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                                    </svg>
+                                    <span style="font-size: 1.4rem;">{{donor.phone_number}}</span>
+                                </div>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#94A3B8"
-                                viewBox="0 0 16 16" style="flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#94A3B8"
+                                viewBox="0 0 16 16" style="flex-shrink: 0; margin-bottom: 0.2rem;">
                                 <path
                                     d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
                                 <path
@@ -147,17 +199,23 @@
                         </button>
                         {% if donor.phone_number_2 %}
                         <button onclick="copyToClipboard('{{donor.phone_number_2}}')" class="btn action-btn-text"
-                            style="flex: 1; justify-content: space-between; align-items: center; border-radius: 1.2rem; background: white; border: 2.5px dashed #E2E8F0; color: var(--color-text-main); font-weight: 800; padding: 1.2rem 1rem; font-size: 1.4rem; transition: all 0.2s; box-shadow: var(--shadow-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            <div style="display: flex; align-items: center; gap: 0.8rem; overflow: hidden;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="var(--color-primary)" viewBox="0 0 16 16" style="flex-shrink: 0;">
-                                    <path fill-rule="evenodd"
-                                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                                </svg>
-                                <span style="overflow: hidden; text-overflow: ellipsis;">{{donor.phone_number_2}}</span>
+                            style="flex: 1; min-width: 140px; justify-content: space-between; align-items: flex-end; border-radius: 1.2rem; background: white; border: 2px dashed #E2E8F0; color: var(--color-text-main); font-weight: 700; padding: 1rem 1.2rem; transition: all 0.2s; box-shadow: var(--shadow-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <div
+                                style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; overflow: hidden;">
+                                <span
+                                    style="font-weight:700;color:var(--color-text-muted);font-size:1rem;text-transform:uppercase;letter-spacing:0.5px;">Extra
+                                    Number</span>
+                                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                        fill="var(--color-primary)" viewBox="0 0 16 16" style="flex-shrink: 0;">
+                                        <path fill-rule="evenodd"
+                                            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                                    </svg>
+                                    <span style="font-size: 1.4rem;">{{donor.phone_number_2}}</span>
+                                </div>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#94A3B8"
-                                viewBox="0 0 16 16" style="flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#94A3B8"
+                                viewBox="0 0 16 16" style="flex-shrink: 0; margin-bottom: 0.2rem;">
                                 <path
                                     d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
                                 <path

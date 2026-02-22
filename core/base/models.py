@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import random
+import string
 
+def generate_donor_id():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
 class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
-    email = models.EmailField(unique=True, null=True)
+    name = models.CharField(max_length=200, null=True, unique=True)
+    email = models.EmailField(null=True, blank=True)
     home_address = models.CharField(max_length=500, null=True, blank=True)
 
     blood_group = models.CharField(max_length=3, null=True, blank=True, choices=[
@@ -13,20 +17,30 @@ class User(AbstractUser):
         ('AB+', 'AB+'), ('AB-', 'AB-'),
         ('O+', 'O+'), ('O-', 'O-'),
     ])
+    age = models.IntegerField(null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True, default="Bahawalnagar")
     hospital_distance = models.CharField(max_length=200, null=True, blank=True, help_text="Enter number only (e.g. 2)")
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     phone_number_2 = models.CharField(max_length=15, null=True, blank=True)
     is_donor = models.BooleanField(default=True, verbose_name="Available for Donation")
     
+    donor_id = models.CharField(max_length=8, unique=True, blank=True, null=True, default=generate_donor_id)
+    is_suspended = models.BooleanField(default=False)
+    
     avatar = models.ImageField(null=True, default="avatar.svg")
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'name'
     REQUIRED_FIELDS = []
 
     def save(self, *args, **kwargs):
-        if self.email:
-            self.username = self.email
+        if self.name and not self.username:
+            self.username = self.name
+        if not self.donor_id:
+            while True:
+                new_id = generate_donor_id()
+                if not User.objects.filter(donor_id=new_id).exists():
+                    self.donor_id = new_id
+                    break
         super(User, self).save(*args, **kwargs)
 
 
